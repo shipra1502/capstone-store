@@ -1,3 +1,5 @@
+import { notFound } from "next/navigation";
+
 async function getShipment(trackingId: string) {
   if (trackingId === "INVALID") return null;
   return {
@@ -15,9 +17,7 @@ export default async function TrackPage({
   const { trackingId } = await params;
   const shipment = await getShipment(trackingId);
 
-  if (!shipment) {
-    return <p>Shipment not found</p>;
-  }
+  if (!shipment) notFound();
 
   return (
     <main className="p-8">
