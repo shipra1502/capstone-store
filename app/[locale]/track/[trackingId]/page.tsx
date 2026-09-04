@@ -1,13 +1,5 @@
 import { notFound } from "next/navigation";
-
-async function getShipment(trackingId: string) {
-  if (trackingId === "INVALID") return null;
-  return {
-    trackingId,
-    status: "In Transit",
-    lastUpdated: new Date().toLocaleString(),
-  };
-}
+import { getShipment } from "@/lib/shipments";
 
 export default async function TrackPage({
   params,
