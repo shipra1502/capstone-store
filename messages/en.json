@@ -19,5 +19,23 @@
       "outForDelivery": "Out for Delivery",
       "delivered": "Delivered"
     }
+  },
+  "login": {
+    "eyebrow": "Dispatcher Access",
+    "title": "Sign in",
+    "emailPlaceholder": "Email",
+    "passwordPlaceholder": "Password",
+    "signingIn": "Signing in…",
+    "signIn": "Sign in",
+    "invalidCredentials": "Invalid email or password"
+  },
+  "admin": {
+    "eyebrow": "Dispatcher Dashboard",
+    "welcome": "Welcome",
+    "activeDeliveries": "Active Deliveries",
+    "delayedShipments": "Delayed Shipments",
+    "driverLoad": "Driver Load",
+    "hoursDelayed": "h delayed",
+    "deliveriesCount": "deliveries"
   }
 }

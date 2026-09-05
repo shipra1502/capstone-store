@@ -6,15 +6,13 @@ async function getActiveDeliveries() {
   ];
 }
 
-export default async function ActiveDeliveries() {
+export default async function ActiveDeliveries({ label }: { label: string }) {
   const deliveries = await getActiveDeliveries();
   return (
     <div className="bg-white rounded-2xl border border-slate-100 p-6 shadow-sm">
       <div className="flex items-center gap-2 mb-4">
         <span className="w-2 h-2 rounded-full bg-blue-500" />
-        <h2 className="text-sm font-semibold text-[#0B1120]">
-          Active Deliveries
-        </h2>
+        <h2 className="text-sm font-semibold text-[#0B1120]">{label}</h2>
         <span className="ml-auto text-2xl font-bold text-[#0B1120]">
           {deliveries.length}
         </span>

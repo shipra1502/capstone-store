@@ -19,5 +19,23 @@
       "outForDelivery": "خارج للتوصيل",
       "delivered": "تم التسليم"
     }
+  },
+  "login": {
+    "eyebrow": "دخول الموزع",
+    "title": "تسجيل الدخول",
+    "emailPlaceholder": "البريد الإلكتروني",
+    "passwordPlaceholder": "كلمة المرور",
+    "signingIn": "جاري تسجيل الدخول…",
+    "signIn": "تسجيل الدخول",
+    "invalidCredentials": "البريد الإلكتروني أو كلمة المرور غير صحيحة"
+  },
+  "admin": {
+    "eyebrow": "لوحة تحكم الموزع",
+    "welcome": "مرحبًا",
+    "activeDeliveries": "التوصيلات النشطة",
+    "delayedShipments": "الشحنات المتأخرة",
+    "driverLoad": "حمل السائقين",
+    "hoursDelayed": "ساعة تأخير",
+    "deliveriesCount": "توصيلات"
   }
 }
