@@ -1,36 +1,56 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Shipment Tracker — Last-Mile Delivery Platform
 
-## Getting Started
+A bilingual (English/Arabic) shipment tracking platform built with Next.js App Router, targeting the UAE logistics market. Public customers can track shipments in real time; dispatchers manage status updates through an authenticated admin dashboard.
 
-First, run the development server:
+**Live demo:** [add your Vercel URL here]
+**Repo:** https://github.com/shipra1502/capstone-store
 
-```bash
+## Features
+
+- **Public tracking** — enter a tracking ID, see live status and delivery photo on completion
+- **Bilingual, RTL-aware** — full English/Arabic support with proper right-to-left layout for Arabic
+- **Dispatcher dashboard** — authenticated admin view with independently-streaming widgets (active deliveries, delayed shipments, driver load)
+- **Manual + automated status updates** — dispatchers update status via a form; a simulated carrier webhook can also push status updates directly, mimicking a real courier partner integration
+- **SEO-ready** — per-shipment dynamic metadata, optimized images
+
+## Tech Stack
+
+- Next.js 16 (App Router, Turbopack)
+- TypeScript
+- Tailwind CSS
+- next-intl (internationalization)
+- Auth.js (NextAuth) — credentials-based auth
+- Node's built-in `crypto` for HMAC webhook signature verification
+
+## Architecture Decisions
+
+- **JWT-based sessions over database sessions** — chosen because auth checks run in Next.js Middleware, which executes on the Edge runtime and can't perform full database queries. JWT verification is a pure cryptographic check, no DB round-trip needed. The tradeoff: sessions can't be instantly revoked before expiry, which a database-backed session could do.
+
+- **ISR + `revalidatePath` over full rebuilds** — the tracking page is cached, but a dispatcher's status update (or a carrier webhook) explicitly invalidates that specific cached page, so customers see fresh data without a full site rebuild.
+
+- **HMAC signature verification on the carrier webhook** — proves an incoming status-update request genuinely came from a trusted carrier system, not a spoofed request. The raw request body is hashed with a shared secret and compared against a signature header, following the same pattern real providers (Stripe, GitHub) use.
+
+- **Middleware handles two concerns in one file** — locale detection/redirection (`next-intl`) and admin route protection (`Auth.js`) are combined into a single `middleware.ts`, since Next.js only supports one Middleware entry point per app.
+
+- **`[locale]` segment wraps the entire route tree** — rather than retrofitting i18n later, routing was structured around locale from the start, since restructuring an existing route tree around a new top-level segment is significantly more disruptive than building it in from day one.
+
+## Known Limitations (honest, by design)
+
+- **Shipment data is stored in a local JSON file, not a real database.** During development, an in-memory store caused a real bug: Next.js's dev server runs Route Handlers and page renders in separate worker processes, so a plain in-memory object wasn't actually shared between them — an update from the webhook silently never reached the page. Switching to disk-based storage fixed this locally, but **a serverless platform like Vercel doesn't guarantee persistent writable disk either** — a production version of this app would use a real database (Postgres via Supabase/Neon) instead.
+- Driver/order data on the dashboard is mocked with artificial delays to demonstrate Suspense streaming, not backed by real records.
+- The carrier webhook is simulated (custom HMAC scheme) rather than integrated with a real courier API, since no such sandbox was available for this project — but follows the same verification pattern real providers use.
+
+## Running Locally
+
+\`\`\`bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+\`\`\`
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Requires a `.env.local` with:
+\`\`\`
+AUTH_SECRET=
+CARRIER_WEBHOOK_SECRET=
+\`\`\`
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Test dispatcher login: `dispatcher@test.com` / `1234`
