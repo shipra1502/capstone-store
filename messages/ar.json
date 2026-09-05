@@ -36,6 +36,7 @@
     "delayedShipments": "الشحنات المتأخرة",
     "driverLoad": "حمل السائقين",
     "hoursDelayed": "ساعة تأخير",
-    "deliveriesCount": "توصيلات"
+    "deliveriesCount": "توصيلات",
+    "logout": "تسجيل الخروج"
   }
 }

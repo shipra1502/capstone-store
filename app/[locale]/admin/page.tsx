@@ -6,6 +6,7 @@ import { AppHeader } from "@/app/components/AppHeader";
 import ActiveDeliveries from "./components/ActiveDeliveries";
 import DelayedShipments from "./components/DelayedShipments";
 import DriverLoad from "./components/DriverLoad";
+import { LogoutButton } from "@/app/components/LogoutButton";
 
 function WidgetSkeleton({ label }: { label: string }) {
   return (
@@ -24,7 +25,10 @@ export default async function AdminDashboard() {
 
   return (
     <main className="min-h-screen bg-[#0B1120]">
-      <AppHeader brand={tCommon("brand")} />
+      <AppHeader
+        brand={tCommon("brand")}
+        rightSlot={<LogoutButton label={t("logout")} />}
+      />{" "}
       <div className="max-w-5xl mx-auto px-6 py-12">
         <div className="mb-8">
           <p className="text-xs font-medium text-amber-400 uppercase tracking-wider mb-1">

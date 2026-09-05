@@ -36,6 +36,7 @@
     "delayedShipments": "Delayed Shipments",
     "driverLoad": "Driver Load",
     "hoursDelayed": "h delayed",
-    "deliveriesCount": "deliveries"
+    "deliveriesCount": "deliveries",
+    "logout": "Log out"
   }
 }
