@@ -1,7 +1,23 @@
 {
+  "brand": "Wasl",
   "landing": {
     "title": "Track Your Shipment",
+    "subtitle": "Enter your tracking ID to see live delivery status",
     "placeholder": "Enter tracking ID",
     "button": "Track"
+  },
+  "tracking": {
+    "currentStatus": "Current status",
+    "status": "Status",
+    "delayedNote": "Running behind schedule — we're on it.",
+    "updated": "Updated",
+    "proofOfDelivery": "Proof of delivery",
+    "stages": {
+      "orderPlaced": "Order Placed",
+      "pickedUp": "Picked Up",
+      "inTransit": "In Transit",
+      "outForDelivery": "Out for Delivery",
+      "delivered": "Delivered"
+    }
   }
 }

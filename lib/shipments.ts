@@ -43,7 +43,7 @@ export async function updateShipmentStatus(trackingId: string, status: string) {
   store[trackingId] = {
     ...store[trackingId],
     status,
-    lastUpdated: new Date().toLocaleString(),
+    lastUpdated: new Date().toISOString(),
   };
   await writeStore(store);
 }

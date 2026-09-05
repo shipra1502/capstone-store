@@ -1,7 +1,23 @@
 {
+  "brand": "وصل",
   "landing": {
     "title": "تتبع شحنتك",
+    "subtitle": "أدخل رقم التتبع لمعرفة حالة التوصيل المباشرة",
     "placeholder": "أدخل رقم التتبع",
     "button": "تتبع"
+  },
+  "tracking": {
+    "currentStatus": "الحالة الحالية",
+    "status": "الحالة",
+    "delayedNote": "الشحنة متأخرة عن الموعد — نحن نعمل على ذلك.",
+    "updated": "آخر تحديث",
+    "proofOfDelivery": "إثبات التسليم",
+    "stages": {
+      "orderPlaced": "تم الطلب",
+      "pickedUp": "تم الاستلام",
+      "inTransit": "قيد الشحن",
+      "outForDelivery": "خارج للتوصيل",
+      "delivered": "تم التسليم"
+    }
   }
 }
