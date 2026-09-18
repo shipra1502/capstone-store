@@ -18,7 +18,8 @@
       "inTransit": "In Transit",
       "outForDelivery": "Out for Delivery",
       "delivered": "Delivered"
-    }
+    },
+    "trackAnother": "Track another shipment"
   },
   "login": {
     "eyebrow": "Dispatcher Access",

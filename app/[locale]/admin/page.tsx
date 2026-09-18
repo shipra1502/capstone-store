@@ -27,6 +27,7 @@ export default async function AdminDashboard() {
     <main className="min-h-screen bg-[#0B1120]">
       <AppHeader
         brand={tCommon("brand")}
+        showNav={false}
         rightSlot={<LogoutButton label={t("logout")} />}
       />{" "}
       <div className="max-w-5xl mx-auto px-6 py-12">

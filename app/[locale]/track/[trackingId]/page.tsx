@@ -6,6 +6,7 @@ import type { Metadata } from "next";
 import { WaslLogo } from "@/app/components/WaslLogo";
 import { StageIcon } from "@/app/components/StageIcon";
 import { AppHeader } from "@/app/components/AppHeader";
+import Link from "next/link";
 
 export async function generateMetadata({
   params,
@@ -126,7 +127,16 @@ export default async function TrackPage({
                 width={600}
                 height={360}
                 className="rounded-xl w-full"
+                priority
               />
+              <div className="mt-6 text-center">
+                <Link
+                  href="/"
+                  className="text-sm text-slate-400 hover:text-white transition-colors"
+                >
+                  ← {t("trackAnother")}
+                </Link>
+              </div>
             </div>
           )}
         </div>

@@ -18,7 +18,8 @@
       "inTransit": "قيد الشحن",
       "outForDelivery": "خارج للتوصيل",
       "delivered": "تم التسليم"
-    }
+    },
+    "trackAnother": "تتبع شحنة أخرى"
   },
   "login": {
     "eyebrow": "دخول الموزع",
