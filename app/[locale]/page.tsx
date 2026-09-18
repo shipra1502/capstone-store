@@ -1,13 +1,13 @@
 "use client";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
-import { WaslLogo } from "../components/WaslLogo";
 import { AppHeader } from "../components/AppHeader";
 
 export default function LandingPage() {
   const t = useTranslations("landing");
   const router = useRouter();
   const tCommon = useTranslations();
+  const tNav = useTranslations("nav");
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -57,7 +57,13 @@ export default function LandingPage() {
 
       {/* top bar — same component, same job as the tracking page */}
       <div className="relative z-20">
-        <AppHeader brand={tCommon("brand")} />
+        <AppHeader
+          brand={tCommon("brand")}
+          navLabels={{
+            track: tNav("track"),
+            dispatcherLogin: tNav("dispatcherLogin"),
+          }}
+        />{" "}
       </div>
 
       {/* centered hero content, no logo here — the top bar already has it */}

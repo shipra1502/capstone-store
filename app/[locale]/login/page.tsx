@@ -9,6 +9,7 @@ export default function LoginPage() {
   const tCommon = useTranslations();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
+  const tNav = useTranslations("nav");
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -36,7 +37,13 @@ export default function LoginPage() {
     <main className="min-h-screen relative overflow-hidden bg-[#0B1120]">
       {/* background unchanged */}
       <div className="relative z-20">
-        <AppHeader brand={tCommon("brand")} />
+        <AppHeader
+          brand={tCommon("brand")}
+          navLabels={{
+            track: tNav("track"),
+            dispatcherLogin: tNav("dispatcherLogin"),
+          }}
+        />{" "}
       </div>
       <div className="relative z-10 flex items-center justify-center px-6 min-h-[calc(100vh-73px)]">
         <div className="w-full max-w-sm">

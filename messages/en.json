@@ -19,7 +19,9 @@
       "outForDelivery": "Out for Delivery",
       "delivered": "Delivered"
     },
-    "trackAnother": "Track another shipment"
+    "trackAnother": "Track another shipment",
+    "notFoundTitle": "Shipment not found",
+    "notFoundMessage": "We couldn't find a shipment with that tracking ID. Please check and try again."
   },
   "login": {
     "eyebrow": "Dispatcher Access",
@@ -39,5 +41,9 @@
     "hoursDelayed": "h delayed",
     "deliveriesCount": "deliveries",
     "logout": "Log out"
+  },
+  "nav": {
+    "track": "Track",
+    "dispatcherLogin": "Dispatcher Login"
   }
 }

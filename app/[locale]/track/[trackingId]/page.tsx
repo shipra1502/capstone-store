@@ -3,10 +3,10 @@ import { getShipment } from "@/lib/shipments";
 import { getTranslations } from "next-intl/server";
 import Image from "next/image";
 import type { Metadata } from "next";
-import { WaslLogo } from "@/app/components/WaslLogo";
 import { StageIcon } from "@/app/components/StageIcon";
 import { AppHeader } from "@/app/components/AppHeader";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 export async function generateMetadata({
   params,
@@ -15,6 +15,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { trackingId } = await params;
   const shipment = await getShipment(trackingId);
+
   if (!shipment) return { title: "Shipment Not Found" };
   return { title: `${shipment.trackingId} — ${shipment.status}` };
 }
@@ -33,6 +34,7 @@ export default async function TrackPage({
   });
   const t = await getTranslations("tracking");
   const tCommon = await getTranslations();
+  const tNav = useTranslations("nav");
 
   const STAGES = [
     { key: "Order Placed", label: t("stages.orderPlaced"), icon: "package" },
@@ -58,7 +60,14 @@ export default async function TrackPage({
   return (
     <main className="min-h-screen relative overflow-hidden bg-[#0B1120]">
       <div className="relative z-10">
-        <AppHeader brand={tCommon("brand")} trackingId={shipment.trackingId} />
+        <AppHeader
+          brand={tCommon("brand")}
+          trackingId={shipment.trackingId}
+          navLabels={{
+            track: tNav("track"),
+            dispatcherLogin: tNav("dispatcherLogin"),
+          }}
+        />
 
         <div className="max-w-lg mx-auto px-6 py-16">
           <div className="bg-white rounded-2xl shadow-[0_1px_3px_rgba(0,0,0,0.1),0_25px_50px_-12px_rgba(0,0,0,0.5)] border border-white/10 p-8">

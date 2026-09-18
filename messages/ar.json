@@ -19,7 +19,9 @@
       "outForDelivery": "خارج للتوصيل",
       "delivered": "تم التسليم"
     },
-    "trackAnother": "تتبع شحنة أخرى"
+    "trackAnother": "تتبع شحنة أخرى",
+    "notFoundTitle": "الشحنة غير موجودة",
+    "notFoundMessage": "لم نتمكن من العثور على شحنة بهذا الرقم. يرجى التحقق والمحاولة مرة أخرى."
   },
   "login": {
     "eyebrow": "دخول الموزع",
@@ -39,5 +41,9 @@
     "hoursDelayed": "ساعة تأخير",
     "deliveriesCount": "توصيلات",
     "logout": "تسجيل الخروج"
+  },
+  "nav": {
+    "track": "تتبع",
+    "dispatcherLogin": "دخول الموزع"
   }
 }
