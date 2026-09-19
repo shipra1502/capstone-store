@@ -6,7 +6,6 @@ import type { Metadata } from "next";
 import { StageIcon } from "@/app/components/StageIcon";
 import { AppHeader } from "@/app/components/AppHeader";
 import Link from "next/link";
-import { useTranslations } from "next-intl";
 
 export async function generateMetadata({
   params,
@@ -34,7 +33,7 @@ export default async function TrackPage({
   });
   const t = await getTranslations("tracking");
   const tCommon = await getTranslations();
-  const tNav = useTranslations("nav");
+  const tNav = await getTranslations("nav");
 
   const STAGES = [
     { key: "Order Placed", label: t("stages.orderPlaced"), icon: "package" },

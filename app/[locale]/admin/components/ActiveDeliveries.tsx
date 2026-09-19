@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 async function getActiveDeliveries() {
   await new Promise((res) => setTimeout(res, 500));
   return [
@@ -19,9 +21,14 @@ export default async function ActiveDeliveries({ label }: { label: string }) {
       </div>
       <ul className="space-y-2">
         {deliveries.map((d) => (
-          <li key={d.id} className="flex justify-between text-sm">
-            <span className="text-slate-500 font-mono">{d.id}</span>
-            <span className="text-[#0B1120]">{d.driver}</span>
+          <li key={d.id}>
+            <Link
+              href={`/admin/shipments/${d.id}`}
+              className="flex justify-between text-sm hover:bg-slate-50 -mx-2 px-2 py-1 rounded transition-colors"
+            >
+              <span className="text-slate-500 font-mono">{d.id}</span>
+              <span className="text-[#0B1120]">{d.driver}</span>
+            </Link>
           </li>
         ))}
       </ul>

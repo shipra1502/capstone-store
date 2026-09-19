@@ -7,6 +7,7 @@ import ActiveDeliveries from "./components/ActiveDeliveries";
 import DelayedShipments from "./components/DelayedShipments";
 import DriverLoad from "./components/DriverLoad";
 import { LogoutButton } from "@/app/components/LogoutButton";
+import { ShipmentSearch } from "./components/ShipmentSearch";
 
 function WidgetSkeleton({ label }: { label: string }) {
   return (
@@ -29,7 +30,7 @@ export default async function AdminDashboard() {
         brand={tCommon("brand")}
         showNav={false}
         rightSlot={<LogoutButton label={t("logout")} />}
-      />{" "}
+      />
       <div className="max-w-5xl mx-auto px-6 py-12">
         <div className="mb-8">
           <p className="text-xs font-medium text-amber-400 uppercase tracking-wider mb-1">
@@ -39,6 +40,7 @@ export default async function AdminDashboard() {
             {t("welcome")}, {session.user?.name}
           </h1>
         </div>
+        <ShipmentSearch />
         <div className="grid md:grid-cols-3 gap-4">
           <Suspense fallback={<WidgetSkeleton label="…" />}>
             <ActiveDeliveries label={t("activeDeliveries")} />
