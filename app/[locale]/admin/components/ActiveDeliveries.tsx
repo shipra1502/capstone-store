@@ -1,15 +1,8 @@
-import Link from "next/link";
-
-async function getActiveDeliveries() {
-  await new Promise((res) => setTimeout(res, 500));
-  return [
-    { id: "SHP-101", driver: "Ahmed" },
-    { id: "SHP-102", driver: "Fatima" },
-  ];
-}
+// admin/components/ActiveDeliveries.tsx
+import { getActiveShipments } from "@/lib/shipments";
 
 export default async function ActiveDeliveries({ label }: { label: string }) {
-  const deliveries = await getActiveDeliveries();
+  const deliveries = await getActiveShipments();
   return (
     <div className="bg-white rounded-2xl border border-slate-100 p-6 shadow-sm">
       <div className="flex items-center gap-2 mb-4">
@@ -20,15 +13,10 @@ export default async function ActiveDeliveries({ label }: { label: string }) {
         </span>
       </div>
       <ul className="space-y-2">
-        {deliveries.map((d) => (
-          <li key={d.id}>
-            <Link
-              href={`/admin/shipments/${d.id}`}
-              className="flex justify-between text-sm hover:bg-slate-50 -mx-2 px-2 py-1 rounded transition-colors"
-            >
-              <span className="text-slate-500 font-mono">{d.id}</span>
-              <span className="text-[#0B1120]">{d.driver}</span>
-            </Link>
+        {deliveries.map((d: any) => (
+          <li key={d.tracking_id} className="flex justify-between text-sm">
+            <span className="text-slate-500 font-mono">{d.tracking_id}</span>
+            <span className="text-[#0B1120]">{d.status}</span>
           </li>
         ))}
       </ul>

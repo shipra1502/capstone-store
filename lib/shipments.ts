@@ -51,3 +51,21 @@ export async function updateShipmentStatus(trackingId: string, status: string) {
   `;
   if (result.length === 0) throw new Error("Shipment not found");
 }
+
+export async function getActiveShipments() {
+  await ensureTable();
+  return sql`
+    SELECT tracking_id, status FROM shipments
+    WHERE status IN ('In Transit', 'Out for Delivery')
+    ORDER BY last_updated DESC
+  `;
+}
+
+export async function getDelayedShipmentsFromDb() {
+  await ensureTable();
+  return sql`
+    SELECT tracking_id, status FROM shipments
+    WHERE status = 'Delayed'
+    ORDER BY last_updated DESC
+  `;
+}

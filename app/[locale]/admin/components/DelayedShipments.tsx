@@ -1,7 +1,4 @@
-async function getDelayedShipments() {
-  await new Promise((res) => setTimeout(res, 2000));
-  return [{ id: "SHP-089", delayHours: 4 }];
-}
+import { getDelayedShipmentsFromDb } from "@/lib/shipments";
 
 export default async function DelayedShipments({
   label,
@@ -10,7 +7,7 @@ export default async function DelayedShipments({
   label: string;
   hoursDelayedLabel: string;
 }) {
-  const delayed = await getDelayedShipments();
+  const delayed = await getDelayedShipmentsFromDb();
   return (
     <div className="bg-white rounded-2xl border border-slate-100 p-6 shadow-sm">
       <div className="flex items-center gap-2 mb-4">
