@@ -1,6 +1,25 @@
 // lib/shipments.ts
-import fs from "fs/promises";
-import path from "path";
+import { neon } from "@neondatabase/serverless";
+
+const sql = neon(process.env.POSTGRES_URL!);
+
+let initialized = false;
+async function ensureTable() {
+  if (initialized) return;
+  await sql`
+    CREATE TABLE IF NOT EXISTS shipments (
+      tracking_id TEXT PRIMARY KEY,
+      status TEXT NOT NULL,
+      last_updated TIMESTAMPTZ NOT NULL DEFAULT now()
+    )
+  `;
+  await sql`
+    INSERT INTO shipments (tracking_id, status)
+    VALUES ('q2132424', 'In Transit')
+    ON CONFLICT (tracking_id) DO NOTHING
+  `;
+  initialized = true;
+}
 
 type Shipment = {
   trackingId: string;
@@ -8,42 +27,27 @@ type Shipment = {
   lastUpdated: string;
 };
 
-const DATA_FILE = path.join(process.cwd(), "data", "shipments.json");
-
-async function readStore(): Promise<Record<string, Shipment>> {
-  try {
-    const raw = await fs.readFile(DATA_FILE, "utf-8");
-    return JSON.parse(raw);
-  } catch {
-    return {
-      q2132424: {
-        trackingId: "q2132424",
-        status: "In Transit",
-        lastUpdated: new Date().toLocaleString(),
-      },
-    };
-  }
-}
-
-async function writeStore(data: Record<string, Shipment>) {
-  await fs.mkdir(path.dirname(DATA_FILE), { recursive: true });
-  await fs.writeFile(DATA_FILE, JSON.stringify(data, null, 2));
-}
-
 export async function getShipment(
   trackingId: string,
 ): Promise<Shipment | null> {
-  const store = await readStore();
-  return store[trackingId] ?? null;
+  await ensureTable();
+  const rows = await sql`
+    SELECT tracking_id, status, last_updated FROM shipments WHERE tracking_id = ${trackingId}
+  `;
+  const row = rows[0];
+  if (!row) return null;
+  return {
+    trackingId: row.tracking_id,
+    status: row.status,
+    lastUpdated: row.last_updated,
+  };
 }
 
 export async function updateShipmentStatus(trackingId: string, status: string) {
-  const store = await readStore();
-  if (!store[trackingId]) throw new Error("Shipment not found");
-  store[trackingId] = {
-    ...store[trackingId],
-    status,
-    lastUpdated: new Date().toISOString(),
-  };
-  await writeStore(store);
+  await ensureTable();
+  const result = await sql`
+    UPDATE shipments SET status = ${status}, last_updated = now() WHERE tracking_id = ${trackingId}
+    RETURNING tracking_id
+  `;
+  if (result.length === 0) throw new Error("Shipment not found");
 }
