@@ -1,10 +1,4 @@
-async function getDriverLoad() {
-  await new Promise((res) => setTimeout(res, 3500));
-  return [
-    { driver: "Ahmed", assigned: 5 },
-    { driver: "Fatima", assigned: 3 },
-  ];
-}
+import { getDriverLoadFromDb } from "@/lib/shipments";
 
 export default async function DriverLoad({
   label,
@@ -13,7 +7,7 @@ export default async function DriverLoad({
   label: string;
   deliveriesLabel: string;
 }) {
-  const load = await getDriverLoad();
+  const load = await getDriverLoadFromDb();
   return (
     <div className="bg-white rounded-2xl border border-slate-100 p-6 shadow-sm">
       <div className="flex items-center gap-2 mb-4">
@@ -21,7 +15,7 @@ export default async function DriverLoad({
         <h2 className="text-sm font-semibold text-[#0B1120]">{label}</h2>
       </div>
       <ul className="space-y-2">
-        {load.map((d) => (
+        {load.map((d: any) => (
           <li key={d.driver} className="flex justify-between text-sm">
             <span className="text-[#0B1120]">{d.driver}</span>
             <span className="text-slate-500">

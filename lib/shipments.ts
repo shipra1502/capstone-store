@@ -69,3 +69,14 @@ export async function getDelayedShipmentsFromDb() {
     ORDER BY last_updated DESC
   `;
 }
+
+export async function getDriverLoadFromDb() {
+  await ensureTable();
+  return sql`
+    SELECT driver, COUNT(*) as assigned
+    FROM shipments
+    WHERE driver IS NOT NULL
+    GROUP BY driver
+    ORDER BY assigned DESC
+  `;
+}
