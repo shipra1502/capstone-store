@@ -84,3 +84,17 @@ export async function getDriverLoadFromDb() {
     ORDER BY assigned DESC
   `;
 }
+
+export async function createShipment(trackingId: string, driver?: string) {
+  await ensureTable();
+  await sql`
+    INSERT INTO shipments (tracking_id, status, driver)
+    VALUES (${trackingId}, 'Order Placed', ${driver || null})
+    ON CONFLICT (tracking_id) DO NOTHING
+  `;
+}
+
+export async function deleteShipment(trackingId: string) {
+  await ensureTable();
+  await sql`DELETE FROM shipments WHERE tracking_id = ${trackingId}`;
+}

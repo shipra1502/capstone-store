@@ -4,6 +4,7 @@ import { AppHeader } from "@/app/components/AppHeader";
 import { LogoutButton } from "@/app/components/LogoutButton";
 import { getTranslations } from "next-intl/server";
 import Link from "next/link";
+import { deleteShipmentAction } from "./actions";
 
 export default async function AdminShipmentPage({
   params,
@@ -66,6 +67,19 @@ export default async function AdminShipmentPage({
                   Update
                 </button>
               </form>
+              {shipment.status === "Delivered" && (
+                <form
+                  action={deleteShipmentAction.bind(null, trackingId, locale)}
+                  className="mt-4"
+                >
+                  <button
+                    type="submit"
+                    className="text-red-600 text-sm hover:text-red-700"
+                  >
+                    Delete this shipment
+                  </button>
+                </form>
+              )}
             </>
           )}
         </div>
