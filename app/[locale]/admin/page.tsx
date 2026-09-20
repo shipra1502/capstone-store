@@ -7,8 +7,8 @@ import ActiveDeliveries from "./components/ActiveDeliveries";
 import DelayedShipments from "./components/DelayedShipments";
 import DriverLoad from "./components/DriverLoad";
 import { LogoutButton } from "@/app/components/LogoutButton";
-import { ShipmentSearch } from "./components/ShipmentSearch";
 import { createShipmentAction } from "./shipments/[trackingId]/actions";
+import { ShipmentManager } from "./components/ShipmentManager";
 
 function WidgetSkeleton({ label }: { label: string }) {
   return (
@@ -46,7 +46,9 @@ export default async function AdminDashboard({
             {t("welcome")}, {session.user?.name}
           </h1>
         </div>
-        <ShipmentSearch />
+        <ShipmentManager
+          createAction={createShipmentAction.bind(null, locale)}
+        />
         <div className="grid md:grid-cols-3 gap-4">
           <Suspense fallback={<WidgetSkeleton label="…" />}>
             <ActiveDeliveries label={t("activeDeliveries")} />
