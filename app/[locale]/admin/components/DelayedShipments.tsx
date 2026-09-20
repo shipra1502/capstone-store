@@ -18,11 +18,11 @@ export default async function DelayedShipments({
         </span>
       </div>
       <ul className="space-y-2">
-        {delayed.map((d) => (
-          <li key={d.id} className="flex justify-between text-sm">
-            <span className="text-slate-500 font-mono">{d.id}</span>
+        {delayed.map((d: any) => (
+          <li key={d.tracking_id} className="flex justify-between text-sm">
+            <span className="text-slate-500 font-mono">{d.tracking_id}</span>
             <span className="text-[#0B1120]">
-              {d.delayHours}
+              {Math.round(d.hours_since_update)}
               {hoursDelayedLabel}
             </span>
           </li>

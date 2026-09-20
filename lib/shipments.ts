@@ -64,9 +64,13 @@ export async function getActiveShipments() {
 export async function getDelayedShipmentsFromDb() {
   await ensureTable();
   return sql`
-    SELECT tracking_id, status FROM shipments
+    SELECT
+      tracking_id,
+      status,
+      EXTRACT(EPOCH FROM (now() - last_updated)) / 3600 AS hours_since_update
+    FROM shipments
     WHERE status = 'Delayed'
-    ORDER BY last_updated DESC
+    ORDER BY last_updated ASC
   `;
 }
 
