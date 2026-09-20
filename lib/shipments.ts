@@ -56,7 +56,7 @@ export async function getActiveShipments() {
   await ensureTable();
   return sql`
     SELECT tracking_id, status FROM shipments
-    WHERE status IN ('In Transit', 'Out for Delivery')
+    WHERE status IN ('Order Placed', 'Picked Up', 'In Transit', 'Out for Delivery')
     ORDER BY last_updated DESC
   `;
 }
