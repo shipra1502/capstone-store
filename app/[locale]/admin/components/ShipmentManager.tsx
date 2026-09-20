@@ -53,7 +53,7 @@ export function ShipmentManager({
             />
             <button
               type="submit"
-              className="bg-[#0B1120] hover:bg-[#1a2332] text-white font-semibold text-sm px-5 py-2.5 rounded-lg transition-colors"
+              className="bg-[#0B1120] hover:bg-[#1a2332] text-white font-semibold text-sm px-5 py-2.5 rounded-lg transition-colors hover:cursor-pointer"
             >
               Find
             </button>
