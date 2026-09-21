@@ -30,7 +30,7 @@ export default async function DelayedShipments({
                   {d.tracking_id}
                 </span>
                 <span className="text-[#0B1120]">
-                  {Math.round(d.hours_since_update)}
+                  {Math.round(d.hours_since_update ?? 0)}
                   {hoursDelayedLabel}
                 </span>
               </span>
