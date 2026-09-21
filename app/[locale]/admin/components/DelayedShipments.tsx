@@ -23,12 +23,19 @@ export default async function DelayedShipments({
           <li key={d.tracking_id}>
             <Link
               href={`/admin/shipments/${d.tracking_id}`}
-              className="flex justify-between text-sm hover:bg-slate-50 -mx-2 px-2 py-1.5 rounded transition-colors"
+              className="group flex items-center justify-between text-sm border border-transparent hover:border-slate-200 hover:bg-slate-50 -mx-2 px-2 py-2 rounded-lg transition-all cursor-pointer"
             >
-              <span className="text-slate-500 font-mono">{d.tracking_id}</span>
-              <span className="text-[#0B1120]">
-                {Math.round(d.hours_since_update)}
-                {hoursDelayedLabel}
+              <span className="flex items-center gap-2">
+                <span className="text-slate-500 font-mono">
+                  {d.tracking_id}
+                </span>
+                <span className="text-[#0B1120]">
+                  {Math.round(d.hours_since_update)}
+                  {hoursDelayedLabel}
+                </span>
+              </span>
+              <span className="text-slate-300 group-hover:text-amber-500 group-hover:translate-x-0.5 transition-all">
+                →
               </span>
             </Link>
           </li>
