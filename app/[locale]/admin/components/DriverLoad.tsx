@@ -1,4 +1,4 @@
-import { getDriverLoadFromDb } from "@/lib/shipments";
+import { getDriverLoadFromDb, ShipmentRow } from "@/lib/shipments";
 
 export default async function DriverLoad({
   label,
@@ -15,7 +15,7 @@ export default async function DriverLoad({
         <h2 className="text-sm font-semibold text-[#0B1120]">{label}</h2>
       </div>
       <ul className="space-y-2">
-        {load.map((d: any) => (
+        {load.map((d: ShipmentRow) => (
           <li key={d.driver} className="flex justify-between text-sm">
             <span className="text-[#0B1120]">{d.driver}</span>
             <span className="text-slate-500">

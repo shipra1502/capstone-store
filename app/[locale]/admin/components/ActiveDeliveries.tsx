@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { getActiveShipments } from "@/lib/shipments";
+import { getActiveShipments, ShipmentRow } from "@/lib/shipments";
 
 export default async function ActiveDeliveries({ label }: { label: string }) {
   const deliveries = await getActiveShipments();
@@ -13,7 +13,7 @@ export default async function ActiveDeliveries({ label }: { label: string }) {
         </span>
       </div>
       <ul className="space-y-1">
-        {deliveries.map((d: any) => (
+        {deliveries.map((d: ShipmentRow) => (
           <li key={d.tracking_id}>
             <Link
               href={`/admin/shipments/${d.tracking_id}`}

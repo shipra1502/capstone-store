@@ -27,6 +27,14 @@ type Shipment = {
   lastUpdated: string;
 };
 
+export type ShipmentRow = {
+  tracking_id: string;
+  status: string;
+  driver?: string | null;
+  last_updated?: string;
+  hours_since_update?: number;
+  assigned?: number;
+};
 export async function getShipment(
   trackingId: string,
 ): Promise<Shipment | null> {
@@ -52,18 +60,19 @@ export async function updateShipmentStatus(trackingId: string, status: string) {
   if (result.length === 0) throw new Error("Shipment not found");
 }
 
-export async function getActiveShipments() {
+export async function getActiveShipments(): Promise<ShipmentRow[]> {
   await ensureTable();
-  return sql`
+  const rows = await sql`
     SELECT tracking_id, status FROM shipments
     WHERE status IN ('Order Placed', 'Picked Up', 'In Transit', 'Out for Delivery')
     ORDER BY last_updated DESC
   `;
+  return rows as ShipmentRow[];
 }
 
-export async function getDelayedShipmentsFromDb() {
+export async function getDelayedShipmentsFromDb(): Promise<ShipmentRow[]> {
   await ensureTable();
-  return sql`
+  const rows = await sql`
     SELECT
       tracking_id,
       status,
@@ -72,17 +81,19 @@ export async function getDelayedShipmentsFromDb() {
     WHERE status = 'Delayed'
     ORDER BY last_updated ASC
   `;
+  return rows as ShipmentRow[];
 }
 
-export async function getDriverLoadFromDb() {
+export async function getDriverLoadFromDb(): Promise<ShipmentRow[]> {
   await ensureTable();
-  return sql`
+  const rows = await sql`
     SELECT driver, COUNT(*) as assigned
     FROM shipments
     WHERE driver IS NOT NULL
     GROUP BY driver
     ORDER BY assigned DESC
   `;
+  return rows as ShipmentRow[];
 }
 
 export async function createShipment(

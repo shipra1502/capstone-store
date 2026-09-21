@@ -3,6 +3,7 @@ import { signIn } from "next-auth/react";
 import { useTranslations } from "next-intl";
 import { AppHeader } from "@/app/components/AppHeader";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function LoginPage() {
   const t = useTranslations("login");
@@ -10,6 +11,7 @@ export default function LoginPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const tNav = useTranslations("nav");
+  const router = useRouter();
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -29,7 +31,7 @@ export default function LoginPage() {
     if (result?.error) {
       setError(t("invalidCredentials"));
     } else {
-      window.location.href = "/admin";
+      router.push("/admin");
     }
   }
 

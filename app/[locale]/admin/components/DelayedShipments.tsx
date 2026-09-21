@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { getDelayedShipmentsFromDb } from "@/lib/shipments";
+import { getDelayedShipmentsFromDb, ShipmentRow } from "@/lib/shipments";
 
 export default async function DelayedShipments({
   label,
@@ -19,7 +19,7 @@ export default async function DelayedShipments({
         </span>
       </div>
       <ul className="space-y-1">
-        {delayed.map((d: any) => (
+        {delayed.map((d: ShipmentRow) => (
           <li key={d.tracking_id}>
             <Link
               href={`/admin/shipments/${d.tracking_id}`}
