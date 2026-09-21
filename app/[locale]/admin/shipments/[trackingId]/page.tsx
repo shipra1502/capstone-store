@@ -23,6 +23,7 @@ export default async function AdminShipmentPage({
       <AppHeader
         brand={tCommon("brand")}
         showNav={false}
+        logoHref="/admin"
         rightSlot={<LogoutButton label={t("logout")} />}
       />
       <div className="max-w-md mx-auto px-6 py-16">

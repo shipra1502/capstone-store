@@ -38,6 +38,7 @@ export default async function AdminDashboard({
       <AppHeader
         brand={tCommon("brand")}
         showNav={false}
+        logoHref="/admin"
         rightSlot={<LogoutButton label={t("logout")} />}
       />
       <div className="max-w-5xl mx-auto px-6 py-12">

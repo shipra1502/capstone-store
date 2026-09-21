@@ -1,4 +1,3 @@
-// components/AppHeader.tsx
 import Link from "next/link";
 import { WaslLogo } from "./WaslLogo";
 
@@ -8,18 +7,20 @@ export function AppHeader({
   rightSlot,
   showNav = true,
   navLabels,
+  logoHref = "/",
 }: {
   brand: string;
   trackingId?: string;
   rightSlot?: React.ReactNode;
   showNav?: boolean;
   navLabels?: { track: string; dispatcherLogin: string };
+  logoHref?: string;
 }) {
   return (
     <header className="border-b border-white/10 bg-[#111827]/80 backdrop-blur-sm px-6 py-4 flex items-center justify-between relative z-20 max-w-3xl mx-auto">
       <div className="flex items-center gap-6">
         <Link
-          href="/"
+          href={logoHref}
           className="flex items-center gap-2.5 hover:opacity-80 transition-opacity"
         >
           <WaslLogo />

@@ -12,7 +12,6 @@ export default async function ActiveDeliveries({ label }: { label: string }) {
           {deliveries.length}
         </span>
       </div>
-      // ActiveDeliveries.tsx
       <ul className="space-y-1">
         {deliveries.map((d: any) => (
           <li key={d.tracking_id}>
