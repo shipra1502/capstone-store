@@ -74,7 +74,7 @@ export function ShipmentManager({
             />
             <SubmitButton
               pendingText="Creating…"
-              className="bg-amber-400 hover:bg-amber-300 text-[#0B1120] font-semibold text-sm px-5 py-2.5 rounded-lg transition-colors whitespace-nowrap"
+              className="bg-amber-400 hover:bg-amber-300 text-[#0B1120] font-semibold text-sm px-5 py-2.5 rounded-lg transition-colors whitespace-nowrap hover:cursor-pointer"
             >
               + Create
             </SubmitButton>

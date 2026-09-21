@@ -1,4 +1,4 @@
-// admin/components/ActiveDeliveries.tsx
+import Link from "next/link";
 import { getActiveShipments } from "@/lib/shipments";
 
 export default async function ActiveDeliveries({ label }: { label: string }) {
@@ -12,11 +12,16 @@ export default async function ActiveDeliveries({ label }: { label: string }) {
           {deliveries.length}
         </span>
       </div>
-      <ul className="space-y-2">
+      <ul className="space-y-1">
         {deliveries.map((d: any) => (
-          <li key={d.tracking_id} className="flex justify-between text-sm">
-            <span className="text-slate-500 font-mono">{d.tracking_id}</span>
-            <span className="text-[#0B1120]">{d.status}</span>
+          <li key={d.tracking_id}>
+            <Link
+              href={`/admin/shipments/${d.tracking_id}`}
+              className="flex justify-between text-sm hover:bg-slate-50 -mx-2 px-2 py-1.5 rounded transition-colors"
+            >
+              <span className="text-slate-500 font-mono">{d.tracking_id}</span>
+              <span className="text-[#0B1120]">{d.status}</span>
+            </Link>
           </li>
         ))}
       </ul>

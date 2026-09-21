@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { getDelayedShipmentsFromDb } from "@/lib/shipments";
 
 export default async function DelayedShipments({
@@ -17,14 +18,19 @@ export default async function DelayedShipments({
           {delayed.length}
         </span>
       </div>
-      <ul className="space-y-2">
+      <ul className="space-y-1">
         {delayed.map((d: any) => (
-          <li key={d.tracking_id} className="flex justify-between text-sm">
-            <span className="text-slate-500 font-mono">{d.tracking_id}</span>
-            <span className="text-[#0B1120]">
-              {Math.round(d.hours_since_update)}
-              {hoursDelayedLabel}
-            </span>
+          <li key={d.tracking_id}>
+            <Link
+              href={`/admin/shipments/${d.tracking_id}`}
+              className="flex justify-between text-sm hover:bg-slate-50 -mx-2 px-2 py-1.5 rounded transition-colors"
+            >
+              <span className="text-slate-500 font-mono">{d.tracking_id}</span>
+              <span className="text-[#0B1120]">
+                {Math.round(d.hours_since_update)}
+                {hoursDelayedLabel}
+              </span>
+            </Link>
           </li>
         ))}
       </ul>
