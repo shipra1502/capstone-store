@@ -25,9 +25,15 @@ export async function createShipmentAction(locale: string, formData: FormData) {
   const trackingId = formData.get("trackingId") as string;
   const driver = formData.get("driver") as string;
   if (!trackingId) throw new Error("Tracking ID is required");
-  await createShipment(trackingId, driver);
+
+  const created = await createShipment(trackingId, driver);
+
   revalidatePath(`/en/admin`);
   revalidatePath(`/ar/admin`);
+
+  if (!created) {
+    redirect(`/${locale}/admin?error=duplicate`);
+  }
   redirect(`/${locale}/admin`);
 }
 

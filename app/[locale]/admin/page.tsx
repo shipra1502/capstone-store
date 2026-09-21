@@ -20,10 +20,13 @@ function WidgetSkeleton({ label }: { label: string }) {
 
 export default async function AdminDashboard({
   params,
+  searchParams,
 }: {
   params: Promise<{ locale: string }>;
+  searchParams: Promise<{ error?: string }>;
 }) {
   const { locale } = await params;
+  const { error } = await searchParams;
   const session = await auth();
   if (!session) redirect("/login");
 
@@ -38,6 +41,11 @@ export default async function AdminDashboard({
         rightSlot={<LogoutButton label={t("logout")} />}
       />
       <div className="max-w-5xl mx-auto px-6 py-12">
+        {error === "duplicate" && (
+          <div className="mb-4 bg-red-50 border border-red-200 text-red-700 text-sm px-4 py-3 rounded-lg">
+            A shipment with that tracking ID already exists.
+          </div>
+        )}
         <div className="mb-8">
           <p className="text-xs font-medium text-amber-400 uppercase tracking-wider mb-1">
             {t("eyebrow")}

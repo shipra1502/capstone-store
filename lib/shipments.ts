@@ -85,13 +85,18 @@ export async function getDriverLoadFromDb() {
   `;
 }
 
-export async function createShipment(trackingId: string, driver?: string) {
+export async function createShipment(
+  trackingId: string,
+  driver?: string,
+): Promise<boolean> {
   await ensureTable();
-  await sql`
+  const result = await sql`
     INSERT INTO shipments (tracking_id, status, driver)
     VALUES (${trackingId}, 'Order Placed', ${driver || null})
     ON CONFLICT (tracking_id) DO NOTHING
+    RETURNING tracking_id
   `;
+  return result.length > 0;
 }
 
 export async function deleteShipment(trackingId: string) {

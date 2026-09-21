@@ -5,6 +5,8 @@ import { LogoutButton } from "@/app/components/LogoutButton";
 import { getTranslations } from "next-intl/server";
 import Link from "next/link";
 import { deleteShipmentAction } from "./actions";
+import { ConfirmDeleteButton } from "../../components/ConfirmDeleteButton";
+import { SubmitButton } from "../../components/SubmitButton";
 
 export default async function AdminShipmentPage({
   params,
@@ -60,24 +62,19 @@ export default async function AdminShipmentPage({
                   <option>Delivered</option>
                   <option>Delayed</option>
                 </select>
-                <button
-                  type="submit"
-                  className="bg-amber-400 hover:bg-amber-300 text-[#0B1120] font-semibold px-4 py-2 rounded-lg text-sm transition-colors hover:cursor-pointer"
+                <SubmitButton
+                  pendingText="Updating…"
+                  className="bg-amber-400 hover:bg-amber-300 text-[#0B1120] font-semibold text-sm px-5 py-2.5 rounded-lg transition-colors whitespace-nowrap hover:cursor-pointer"
                 >
                   Update
-                </button>
+                </SubmitButton>
               </form>
               {shipment.status === "Delivered" && (
                 <form
                   action={deleteShipmentAction.bind(null, trackingId, locale)}
                   className="mt-4"
                 >
-                  <button
-                    type="submit"
-                    className="text-red-600 text-sm hover:text-red-700"
-                  >
-                    Delete this shipment
-                  </button>
+                  <ConfirmDeleteButton label="Delete this shipment" />
                 </form>
               )}
             </>

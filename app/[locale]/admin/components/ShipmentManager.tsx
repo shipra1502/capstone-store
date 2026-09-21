@@ -2,6 +2,7 @@
 "use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { SubmitButton } from "./SubmitButton";
 
 export function ShipmentManager({
   createAction,
@@ -23,7 +24,7 @@ export function ShipmentManager({
       <div className="flex border-b border-slate-100">
         <button
           onClick={() => setTab("search")}
-          className={`flex-1 px-4 py-3 text-sm font-medium transition-colors ${
+          className={`flex-1 px-4 py-3 text-sm font-medium transition-colors hover:cursor-pointer ${
             tab === "search"
               ? "text-[#0B1120] border-b-2 border-amber-400"
               : "text-slate-400 hover:text-slate-600"
@@ -33,7 +34,7 @@ export function ShipmentManager({
         </button>
         <button
           onClick={() => setTab("create")}
-          className={`flex-1 px-4 py-3 text-sm font-medium transition-colors ${
+          className={`flex-1 px-4 py-3 text-sm font-medium transition-colors hover:cursor-pointer ${
             tab === "create"
               ? "text-[#0B1120] border-b-2 border-amber-400"
               : "text-slate-400 hover:text-slate-600"
@@ -49,14 +50,14 @@ export function ShipmentManager({
             <input
               name="trackingId"
               placeholder="Enter tracking ID to update"
-              className="flex-1 px-3 py-2.5 rounded-lg border border-slate-200 text-sm text-[#0B1120] placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-amber-400"
+              className="flex-1 px-3 py-2.5 rounded-lg border border-slate-200 text-sm text-[#0B1120] placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-amber-400 hover:cursor-pointer"
             />
-            <button
-              type="submit"
+            <SubmitButton
+              pendingText="Finding…"
               className="bg-[#0B1120] hover:bg-[#1a2332] text-white font-semibold text-sm px-5 py-2.5 rounded-lg transition-colors hover:cursor-pointer"
             >
               Find
-            </button>
+            </SubmitButton>
           </form>
         ) : (
           <form action={createAction} className="flex gap-2">
@@ -64,19 +65,19 @@ export function ShipmentManager({
               name="trackingId"
               placeholder="Tracking ID"
               required
-              className="flex-1 px-3 py-2.5 rounded-lg border border-slate-200 text-sm text-[#0B1120] placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-amber-400"
+              className="flex-1 px-3 py-2.5 rounded-lg border border-slate-200 text-sm text-[#0B1120] placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-amber-400 hover:cursor-pointer"
             />
             <input
               name="driver"
               placeholder="Driver (optional)"
-              className="flex-1 px-3 py-2.5 rounded-lg border border-slate-200 text-sm text-[#0B1120] placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-amber-400"
+              className="flex-1 px-3 py-2.5 rounded-lg border border-slate-200 text-sm text-[#0B1120] placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-amber-400 hover:cursor-pointer"
             />
-            <button
-              type="submit"
-              className="bg-amber-400 hover:bg-amber-300 text-[#0B1120] font-semibold text-sm px-5 py-2.5 rounded-lg transition-colors whitespace-nowrap hover:cursor-pointer hover:cursor-pointer"
+            <SubmitButton
+              pendingText="Creating…"
+              className="bg-amber-400 hover:bg-amber-300 text-[#0B1120] font-semibold text-sm px-5 py-2.5 rounded-lg transition-colors whitespace-nowrap"
             >
               + Create
-            </button>
+            </SubmitButton>
           </form>
         )}
       </div>
