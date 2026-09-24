@@ -2,8 +2,8 @@
 
 A bilingual (English/Arabic) shipment tracking platform built with Next.js App Router, targeting the UAE logistics market. Public customers track shipments in real time via a branded timeline view; dispatchers manage a full shipment lifecycle — create, update status, delete — through an authenticated admin dashboard.
 
-**Live demo:** https://capstone-store-chi.vercel.app
-**Repo:** https://github.com/shipra1502/capstone-store
+**Live demo:** https://wasl-logistics.vercel.app
+**Repo:** https://github.com/shipra1502/wasl
 
 ## Features
 
